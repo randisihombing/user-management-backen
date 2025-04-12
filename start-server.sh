@@ -1,5 +1,10 @@
 #!/bin/bash
+set -e
 
-php artisan config:cache
+# Cache config dan jalankan migrasi
+php artisan config:clear
+php artisan cache:clear
 php artisan migrate --force
-php -S 0.0.0.0:9000 -t public
+
+# Gunakan PORT dari Railway atau default 8080
+php -S 0.0.0.0:${PORT:-8080} -t public
